@@ -14,28 +14,37 @@ qb = data.groupby(['passer_id', 'passer']).agg({
     'air_yards': ['mean'],
     'qb_scramble': ['mean'],
     'sack': ['mean'],
+    'interception': ['mean'],
+    'success': ['mean'],
+    'complete_pass': ['mean']
 }).reset_index()
 
 qb.columns = ['_'.join(col) if type(col) is tuple else col for col in qb.columns]
 
-# filter for quarterbacks with at least 200 pass attempts 
-qb = qb.loc[qb['pass_sum'] >= 200]
+# filter for quarterbacks with at least 500 pass attempts 
+qb = qb.loc[qb['pass_sum'] >= 500]
 
 # standardize the statistics
 scaler = StandardScaler()
-stats_columns = ['pass_sum', 'epa_mean', 'epa_sum', 'cpoe_mean', 'air_yards_mean', 'qb_scramble_mean', 'sack_mean']
+stats_columns = ['epa_mean', 'cpoe_mean', 'air_yards_mean', 'qb_scramble_mean', 'sack_mean', 'interception_mean', 'success_mean', 'complete_pass_mean']
 qb[stats_columns] = scaler.fit_transform(qb[stats_columns])
 
 # define weights 
 weights = {
-    'pass_sum': 0.5, 
-    'epa_mean': 2.0, 
-    'epa_sum': 1.0, 
-    'cpoe_mean': 1.5, 
-    'air_yards_mean': 2.0, 
-    'qb_scramble_mean': 2.0, 
-    'sack_mean': 2.0
+    'pass_sum': 0.3, 
+    'epa_mean': 3.0, 
+    'epa_sum': 1.0,   
+    'cpoe_mean': 3.0, 
+    'air_yards_mean': 4.0, 
+    'qb_scramble_mean': 6.0, 
+    'sack_mean': -2.0,  
+    'interception_mean': -2.0, 
+    'success_mean': 2.5,  
+    'complete_pass_mean': 2.0  
 }
+
+
+
 
 # compute aggregate statistic
 qb['aggregate_stat'] = sum(qb[col] * weight for col, weight in weights.items())
