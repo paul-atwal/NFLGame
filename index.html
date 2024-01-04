@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QB Comparison</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center mt-5">Quarterback Similarity Game</h1>
+
+      <!-- New game button -->
+      <div class="text-center mt-4">
+        <button id="newGameButton" class="btn btn-primary">New Game</button>
+      </div>
+
+      <!-- Quarterback name display -->
+      <div class="text-center mt-4">
+        <h2 id="qbNameDisplay">[Quarterback Name]</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title" id="card1">#1</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title" id="card2">#2</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title" id="card3">#3</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title" id="card4">#4</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title" id="card5">#5</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-2 justify-content-center">
+        <div class="col-auto">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="T.Brady"
+            id="qbGuess"
+          />
+          <div id="suggestions" class="suggestions-dropdown"></div>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3" id="newGuess">
+            Guess
+            <span class="badge text-bg-secondary" id="newGuessBadge">0</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center mt-3" id="feedbackMessage"></div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="app.js"></script>
+  </body>
+</html>
