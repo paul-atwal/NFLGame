@@ -1,6 +1,5 @@
 const newGameButton = document.querySelector("#newGameButton");
 const newGuessButton = document.querySelector("#newGuess");
-// const endGameMessage = document.querySelector("#endGameMessage");
 const feedbackMessage = document.querySelector("#feedbackMessage");
 const qbNameDisplay = document.querySelector("#qbNameDisplay");
 const guessBadge = document.querySelector(".badge");
@@ -24,7 +23,7 @@ qbGuessInput.addEventListener("input", () => {
   const userInput = qbGuessInput.value.toLowerCase();
 
   // Fetch the list of QB names from backend
-  fetch("http://127.0.0.1:5000/qb-names")
+  fetch("http://localhost:5001/qb-names")
     .then((response) => response.json())
     .then((qbNames) => {
       // Filter QB names based on input value
@@ -51,7 +50,7 @@ qbGuessInput.addEventListener("input", () => {
 });
 
 function startNewGame() {
-  fetch("http://127.0.0.1:5000/random-qb")
+  fetch("http://localhost:5001/random-qb")
     .then((response) => response.json())
     .then((data) => {
       qbNameDisplay.textContent = data;
@@ -86,7 +85,7 @@ function checkGuess() {
 
   const qbName = qbNameDisplay.textContent;
 
-  fetch(`http://127.0.0.1:5000/similar-qbs/${qbName}`)
+  fetch(`http://localhost:5001/similar-qbs/${qbName}`)
     .then((response) => response.json())
     .then((similarQbList) => {
       const guessedIndex = similarQbList.indexOf(qbGuess);
@@ -122,7 +121,7 @@ function isGameOver() {
     feedbackMessage.textContent =
       "Game over! You've made too many incorrect guesses.";
     // Fetch and reveal the remaining QBs and disable further guesses
-    fetch(`http://127.0.0.1:5000/similar-qbs/${qbNameDisplay.textContent}`)
+    fetch(`http://localhost:5001/similar-qbs/${qbNameDisplay.textContent}`)
       .then((response) => response.json())
       .then(revealAnswers)
       .catch((error) => console.error("Error:", error));

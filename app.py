@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Load the processed QB data
 qb_data = pd.read_csv('processed_qb_data.csv')
@@ -47,4 +47,4 @@ def qb_names():
     return jsonify(list(qb_data['passer_'].unique()))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port=5001, debug=True)
